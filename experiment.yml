@@ -1,0 +1,43 @@
+BEAMD: &BEAMD !IPythonStage
+  name: BEAMD
+  notebook_pipeline: BaseExperimentAndMetodsDifference.pipeline_2
+
+Approximation: &Approximation !IPythonStage
+  name: Approximation
+  notebook_pipeline: Approximation.pipeline
+
+basic: &basic !IPythonStage
+  name: basic
+  notebook_pipeline: basic_experiment.pipeline
+
+linear: &linear !IPythonStage
+  name: linear
+  notebook_pipeline: linear_model_and_ensemble_comparing.pipeline
+
+Nadaraya: &Nadaraya !IPythonStage
+  name: Nadaraya
+  notebook_pipeline: NadarayaWatson.pipeline
+
+Phase: &Phase !IPythonStage
+  name: Phase
+  notebook_pipeline: Phase_detector.pipeline
+
+Vis: &Vis !IPythonStage
+  name: Vis
+  notebook_pipeline: Visualisation.pipeline
+
+Run: &Run !IPythonStage
+  name: Run
+  notebook_pipeline: Run.pipeline
+
+distance: &distance !IPythonStage
+  name: distance
+  notebook_pipeline: distance_between_local_models_and_errors.pipeline
+
+mnist: &mnist !IPythonStage
+  name: mnist
+  notebook_pipeline: mnist_hypernets.pipeline
+
+pipeline: !GenericPipeline
+  runs:
+    - *BEAMD
