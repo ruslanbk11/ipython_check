@@ -1,0 +1,97 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{a4wide}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{url}
+
+\begin{document} 
+\title{Concordant models for latent space projections in forecasting\thanks{This paper contains results of the project Mathematical methods for intelligent big data analysis, which is carried out within the framework of the Program "Center of Big Data Storage and Analysis" of the National Technology Initiative Competence Center. It is supported by the Ministry of Science and Higher Education of the Russian Federation according to the agreement between the M.V. Lomonosov Moscow State University and the Foundation of project support of the National Technology Initiative from 11.12.2018, No 13/1251/2018. This research was supported by RFBR (projects  19-07-01155, 19-07-00875).}}
+\date{}
+\maketitle
+
+\begin{center}
+\bf
+F.Yu. Yaushev\footnote{Moscow Institute of Physics and Technology, fyaush@mail.ru},
+R. V. Isachenko\footnote{Moscow Institute of Physics and Technology, roman.isachenko@phystech.edu},
+V. V. Strijov\footnote{Moscow Institute of Physics and Technology, Dorodnicyn Computing Centre, Federal Research Center “Computer Science and Control” of the Russian Academy of Sciences, strijov@phystech.edu}
+\end{center}
+
+{\centering\begin{quote}
+\textbf{Abstract}: 
+The paper examines the problem of predicting a complex structured target variable. 
+Complexity refers to the presence of dependencies, whether linear or non-linear. 
+The source data is assumed to be heterogeneous.
+This means that the spaces of the independent and target variables are of different nature. 
+It is proposed to build a predictive model that takes into account the dependence in the input space of the independent variable, as well as in the space of the target variable. 
+It is proposed to make model agreement procedure in a low-dimensional latent space. 
+The projection to latent space method is used as the basic algorithm. 
+The paper compares the linear and proposed nonlinear models. 
+The comparison is performed on heterogeneous data in high-dimensional spaces.
+
+	
+\smallskip
+\textbf{Keywords}: partial least squares, model concordance, nonlinear projection to latent space
+\end{quote}
+}
+
+\begin{otherlanguage}{english}
+\bibliographystyle{unsrt}
+\begin{thebibliography}{99}
+
+
+\bibitem{overview_pls}
+Rosipal R., N. Kramer, and A. Graves. 2005. Overview and recent advances in partial least squares. \textit{International Statistical and Optimization Perspectives Workshop "Subspace, Latent Structure and Feature Selection".} 34--51.
+
+\bibitem{overview_nonlinear_pls}
+Rosipal R. 2011. Nonlinear partial least squares: An overview. \textit{Chemoinformatics and Advanced Machine Learning Perspectives.} 169--189.
+
+\bibitem{1figures}
+Nguyen D. V., D. M. Rocke. 2012. Tumor classification by partial least squares using microarray gene expression data. \textit{Bioinformatics.} 18:39--50. 
+
+\bibitem{btc519}
+Worsley K. J. 1997. An overview and some new developments in the statistical analysis of pet and fmri data. \textit{Human Brain Mapping.} 5:254--258.
+
+\bibitem{PLS_in_strategic_management}
+Hulland J. S. 1999. Use of partial least squares (pls) in strategic management research: A review of four recent studies. \textit{Strategic Management Journal.} 20:195--204.
+
+\bibitem{PLS_application}
+Shalamu Abudu P. E., T. C. Pagano. 2010. Application of partial least-squares regression in seasonalstreamflow forecasting. \textit{Journal of Hydrologic Engineering.} 15:612--623.
+
+\bibitem{cca_alg}
+Szedmak S. R., D. R. Hardoon, and J. R. Shawe-taylor. 2004. Canonical correlation analysis: An overview with application to learning methods. \textit{Neural computation.} 16:2639--2664.
+
+\bibitem{cca_apl1}
+Schechner Y. Y., E. Kidron, and M. Elad. 2005. Pixels that sound. \textit{IEEE Computer Society.} 88--95.
+
+\bibitem{cca_apl2}
+Sun S., L. Ji, and J. Ye. 2008. A least squares formulation for canonical correlation analysis. \textit{International Confenence on Machine Learning.} 1024--1031.
+
+\bibitem{PLS_nn}
+Qin S. J., T. J. McAvoy. 1992. Nonlinear pls modeling using neural networks. \textit{Computers Chemical Engineering.} 16:379--391.
+
+\bibitem{PLS_rbf}
+Chen D. Z., X. F. Yan, and S. X. Hu. 2003. Chaos-genetic algorithms for optimizing the operating conditions based on rbf-pls model. \textit{Computers and Chemical Engineering.} 27:1393--1404.
+
+\bibitem{PLS_ga}
+Hiden M., B. McKay, and G. Montague. 1998. Non-linear partial least squares using genetic programming. \textit{Genetic Programming.} 128--133.
+
+\bibitem{deep_cca}
+Chen D. Z., X. F. Yan, and S. X. Hu. 2013. Deep canonical correlation analysis. \textit{International Confenence on Machine Learning}. 1247--1255.
+
+\bibitem{kernel_cca}
+Lai P. L., C. Fyfe. 2000. Kernel and nonlinear canonical correlation analysi. \textit{International Journal of Neural Systems.} 10:365--377.
+
+\bibitem{kernel_cca_appl}
+Yan F., K. Mikolajczyk. 2015. Deep correlation for matching images and text. \textit{Computer Vision and Pattern Recognition.} 4:3441--3450.
+
+\bibitem{MNIST}
+LeCun Y., C. Cortes, and C. Burges. 1998. The MNIST dataset of handwritten digits. Available at: \url{http://yann.lecun.com/exdb/mnist/index.html}.
+
+\bibitem{source_code}
+Yaushev F. Yu, R. V. Isachenko. Concordant models for latent space projections in the complex structured prediction tasks. Project source code is available at:~\url{https://github.com/Fyaushev/2020-Project-72}, 2020.
+		
+\end{thebibliography}
+\end{otherlanguage}
+\end{document} 

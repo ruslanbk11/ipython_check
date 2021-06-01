@@ -1,0 +1,42 @@
+{
+  "data_type": "mnist_left_right",
+  "num_epochs": 2,
+  "batch_size": 256,
+  "models": {
+    "encoder_input": {
+      "arch": [
+        {"type":  "conv", "n_in": 1, "n_out": 16},
+        {"type":  "pool"},
+        {"type":  "conv", "n_in": 16, "n_out": 8}
+      ]
+    },
+    "decoder_target": {
+      "arch": [
+        {"type":  "conv", "n_in": 8, "n_out": 16},
+        {"type":  "upsample"},
+        {"type":  "conv", "n_in": 16, "n_out": 1, "activation_fn":  "sigmoid"}
+      ]
+    },
+    "alignment": {
+      "arch": [
+        {"type":  "conv", "n_in": 8, "n_out": 8},
+        {"type":  "conv", "n_in": 8, "n_out": 8}
+      ]
+    }
+  },
+  "losses": {
+    "prediction": {
+      "scale": 1.0,
+      "type": "mse"
+    }
+  },
+  "optimizer": {
+    "type": "sgd",
+    "kwargs": {"lr": 0.5}
+  },
+  "summary": {
+    "train_frequency": 10,
+    "valid_frequency": 50,
+    "save_frequency": 200
+  }
+}

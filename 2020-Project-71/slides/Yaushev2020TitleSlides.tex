@@ -1,0 +1,329 @@
+\documentclass[9pt,pdf,hyperref={unicode}]{beamer}
+\beamertemplatenavigationsymbolsempty
+
+\setbeamertemplate{blocks}[rounded=false, shadow=false]
+\setbeamertemplate{footline}[page number]
+\usepackage{multicol}
+
+\usefonttheme{serif}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{amsmath,mathrsfs,mathtext}
+\usepackage{graphicx, epsfig}
+\usepackage{caption}
+\usepackage{subfig}
+\usepackage{amsmath, bm}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bc}{\mathbf{c}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bW}{\mathbf{W}}
+
+\usepackage{graphicx}
+
+\graphicspath{{./figures/}}
+\usepackage{subcaption}
+\usepackage{neuralnetwork}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\makeatletter
+\let\@@magyar@captionfix\relax
+\makeatother
+
+\usetheme{Warsaw}
+\usecolortheme{sidebartab}
+\definecolor{beamer@blendedblue}{RGB}{92, 57, 189}
+
+\setbeamertemplate{enumerate items}[circle]
+
+\setbeamersize{text margin left=1.5em, text margin right=1.5em}
+
+\usepackage{ragged2e}
+
+
+%----------------------------------------------------------------------------------------------------------
+\title[\hbox to 56mm{Исследование способов согласования моделей \hfill\insertframenumber\,/\,\inserttotalframenumber}]
+{Исследование способов согласования моделей с помощью снижения размерности пространства}
+\author[Яушев Ф.\ Р.]{\Large Яушев Фарух Рамильевич}
+\institute{ Московский физико-технический институт\\
+Факультет управления и прикладной математики\\
+Кафедра интеллектуальных систем\\
+~\\
+Консультант к.ф.-м.н. О.\ Р. Исаченко\\
+Научный руководитель д.ф.-м.н. В.\ В. Стрижов
+}
+
+\date{\footnotesize{\emph{Москва}\\
+ 2020 г}}
+%----------------------------------------------------------------------------------------------------------
+\begin{document}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}
+\titlepage
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Цель работы}
+
+    \begin{block}{Задача} 
+    Прогнозирование целовой переменной сложной структуры.
+    \end{block}
+    
+    ~\\
+    \begin{block}{Проблема}
+    Исходные данные имеют высокие размерности и в пространствах целевой и независимой переменных есть зависимости, что приводит к неустойчивости модели.
+    \end{block}
+    
+    ~\\
+    \begin{block}{Метод решения}
+    Построить модель, которая переводит данные в низкоразмерные пространства и согласует их в полученном скрытом представлении.
+    \end{block}
+
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Постановка задачи}
+
+	\begin{block}{Данные}
+	    Дана выборка ($\bX, \bY$), где $\bX = [\bx_1, \cdots, \bx_n]^{\bT} \in \mathbb{R}^{n \times m}$~--- матрица независимых переменных, $\bY = [\by_1, \cdots, \by_n]^{\bT} \in \mathbb{R}^{n \times k}$~--- матрица целевых переменных. 
+	\end{block}
+	
+	\begin{block}{}
+	    Предполагается, что между $\bX$ и целевой $\bY$ существует зависимость
+        $$
+        \bY = f(\bX) + \boldsymbol{\varepsilon},
+        $$
+        где $f: \mathbb{R}^{n \times m} \to \mathbb{R}^{n \times k}$~--- функция регрессионной зависимости, $\boldsymbol{\varepsilon}$ - матрица регрессионных ошибок.
+	\end{block}
+	
+	\begin{block}{}
+	    Необходимо воостановить зависимость $f$ по заданной выборке.	
+	\end{block}
+
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Постановка задачи}
+		\begin{block}{Определение 1}
+		    Параметрическая функция $\varphi_1 : \mathbb{R}^{n \times m} \to \mathbb{R}^{n \times p}$, переводящая исходные данные в латентное пространство, называется \textbf{функцией кодирования}.
+		\end{block}
+		
+		\begin{block}{Определение 2}
+		    Параметрическая функция $\varphi_2 : \mathbb{R}^{n \times k} \to \mathbb{R}^{n \times p}$, переводящая данные из латентного пространства в исходное, называется \textbf{функцией восстановления}.
+		\end{block}
+				
+		\begin{block}{Определение 3}
+		    Функция $g : \mathbb{R}^{n \times p} \times \mathbb{R}^{n \times p} \to \mathbb{R}$, связывающая два низкоразмерных латентных представления, называется \textbf{функцией согласования}.
+		\end{block}
+	
+\end{frame}
+
+
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Постановка задачи}
+    \begin{block}{ Общая схема}
+        	\begin{figure}[h]
+            \center{\includegraphics[width=0.48\linewidth]{figures/for_slides/scheme.png}}
+            \label{ris:image1}
+            \end{figure}
+    \end{block}
+    \begin{block}{}
+        Оптимальные параметры $\theta_{\varphi_1}^{*}, \theta_{\psi_1}^{*}$ для функций кодирования $\varphi_1$  и $\psi_1$ находятся из следующей задачи параметрической оптимизации:
+        \begin{equation}
+        (\theta_{\varphi_1}^{*}, \theta_{\psi_1}^{*}) = \argmax_{(\theta_{\varphi_1}, \theta_{\psi_1})} [g\left(\varphi_1(\bX; \theta_{\varphi_1}), \psi_1(\bY; \theta_{\psi_1})\right)].
+        \label{eq:argmax}
+        \end{equation}
+    \end{block}
+\end{frame}
+
+
+
+%----------------------------------------------------------------------------------------------------------
+
+\begin{frame}{Постановка задачи}
+    \begin{block}{}
+        После перехода в латентное пространство между $\mathbf{T}$ и $\mathbf{U}$ существует зависимость
+        $$
+        \bU = h(\bT) +  \boldsymbol{\eta},
+        $$
+        где $h: \mathbb{R}^{n \times p} \to \mathbb{R}^{n \times p}$~--- функция регрессионной зависимости,  $\boldsymbol{\eta}$~--- матрица регрессионнх ошибок.
+    \end{block}
+    \begin{block}{}
+        Оптимальные параметры для $h$ выбираются минимизацией функции ошибки. Используем квадратичную функцию ошибки потерь $\mathcal{L}$ на $\bT$ и $\bU$:
+        $$
+        \mathcal{L}(h | {\bT}, {\bU}) = {\left\| \underset{n \times p}{\bU}  - h(\underset{m \times p}{\bT}) \right\| }_2^2 \rightarrow\min_{h}.
+        $$
+    \end{block}
+    \begin{block}{}
+        Финальная прогностическая модель имеет вид:
+        $$
+        f = \psi_2 \circ h \circ \varphi_1.
+        $$
+    \end{block}
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------
+
+\begin{frame}{Эксперименты}
+
+    \begin{block}{}
+        Проведем сравнение DeepCCA и CCA на задаче классификации за-
+шумленных цифровых изображений.
+    \end{block}
+	\begin{figure}[h]
+    \begin{center}
+        \begin{tabular}{m{.3\textwidth}   m{.3\textwidth}}
+            \includegraphics[scale=1.5]{figures/noisy_mnist/data1.pdf} & 
+            \includegraphics[scale=1.5]{figures/noisy_mnist/data2.pdf} \\
+        \end{tabular}
+    \end{center}
+    \caption{Зашумленные изображений из набора данных MNIST}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Эксперимент}
+    
+    \begin{block}{Канонический анализ корреляций (CCA)}
+        Функция согласования:
+        $$
+        g(\bX \bw_{\bx}, \bY \bw_{\by}) = \textbf{corr}(\bX \bw_{\bx}, \bY \bw_{\by}),
+        $$
+        Функции кодирования:
+        $$
+        \varphi_1(\bX) = \bW_{\bx}^{\bT}\bX , \;\;
+        \psi_1(\bY) = \bW_{\by}^{\bT}\bY ,
+        $$
+    \end{block}
+
+
+    \begin{table}[h!]
+    	\caption{Получение нового признакового пространство размерности 15 с использованием DeepCCA и CCA. Показатыелем эффективности будет точность классификации линейного SVM  (ACC).}
+    	\centering
+    	\begin{tabular}{l|cc}
+    		\hline
+    		& DeepCCA(L=3) & CCA \\  \hline
+    		Validation data & $92.74\%$  &  $76.21\%$\\
+    		Test data & $92.14\%$ & $76.07\%$ \\
+    		\hline
+    	\end{tabular}
+    \end{table}
+\end{frame}{}
+
+\begin{frame}{Эксперимент}
+
+    \begin{block}{}
+    Решается задача восстановления правой части изображения по левой.
+    \end{block}
+    \begin{figure}[h!]
+    \begin{center}
+        \begin{tabular}{
+        m{.042\textwidth}   m{.05\textwidth}   m{.042\textwidth}   m{.05\textwidth}  m{.042\textwidth}   m{.05\textwidth}   m{.042\textwidth}   m{.05\textwidth}    
+        }
+    
+            \includegraphics[scale=3]{figures/original/0.pdf} & 
+            \includegraphics[scale=3]{figures/original/1.pdf} & 
+            \includegraphics[scale=3]{figures/original/2.pdf} & 
+            \includegraphics[scale=3]{figures/original/3.pdf} & 
+            \includegraphics[scale=3]{figures/original/4.pdf} & 
+            \includegraphics[scale=3]{figures/original/5.pdf} & 
+            \includegraphics[scale=3]{figures/original/6.pdf} & 
+            \includegraphics[scale=3]{figures/original/7.pdf} \\
+        
+        \end{tabular}
+        \end{center}
+    	\caption{Набор данных MNIST, каждое изображение в котором разделили пополам.}
+    \end{figure}
+
+    % \begin{figure}[h!]
+    %     \begin{center}
+    %         \begin{tabular}{
+    %         m{.042\textwidth}   m{.05\textwidth}   m{.042\textwidth}   m{.05\textwidth}  m{.042\textwidth}   m{.05\textwidth}   m{.042\textwidth}   m{.05\textwidth}    
+    %         }
+        
+    %             \includegraphics[scale=0.2]{figures/original/test.png} \\
+            
+    %         \end{tabular}
+    %     \end{center}
+    %     	\caption{Схема автоэнкодеров с совместной функцией потерь.}
+    %     	\label{fgr:3}
+    % \end{figure}
+\end{frame}
+\begin{frame}{Эксперимент}
+
+    \begin{table}[h!]
+	\caption{Восстановление правой части изображения по левой с использованием различных моделей. Для измерения качества моделей считается среднеквадратическое отклонения от оригинального изображения.
+	}
+	\centering
+	\begin{tabular}{l|cccccc}
+		\hline
+	   & EncNet1 & LinNet1 & EncNet2 & LinNet2 & DumbNet & PLS\\  \hline
+		Кол-во весов & $283$k & $239$k & $283$k & $239$k  & $283$k & -\\ 
+		MSE loss & $0.147$ & $ 0.235$ & $0.149$ & $0.236$ & $0.128$ & $0.188$ \\ 
+		\hline
+	\end{tabular}
+	\label{tbl:2}
+\end{table}
+\end{frame}
+
+\begin{frame}{Эксперимент}
+    \begin{figure}[h!]
+        \begin{center}
+            \begin{tabular}{
+           
+            }
+        
+                \includegraphics[scale=0.45]{figures/for_slides/test.png} & 
+            
+            \end{tabular}
+        \end{center}
+        \caption{}
+    \end{figure}
+\end{frame}
+
+
+%----------------------------------------------------------------------------------------------------------
+% \begin{frame}{Список литературы}
+% 		\begin{thebibliography}{1}
+			
+% 			\bibitem{conf/nips/Graves11}
+% 			\BibAuthor{Alex Graves}
+% 			\BibTitle{Practical Variational Inference for Neural Networks}~//
+% 			\BibJournal{Advances in Neural Information Processing Systems 24: 25th Annual Conference on Neural Information Processing Systems 2011. Proceedings of a meeting held 12-14 December 2011, Granada, Spain}
+			
+% 			\bibitem{journals/corr/HaDL16}
+% 			\BibAuthor{David Ha and Andrew M. Dai and Quoc V. Le}
+% 			\BibTitle{HyperNetworks}~//
+% 			\BibJournal{CoRR}, vol. abs/1609.09106, 2018.
+			
+% 			\bibitem{author09anyscience}
+% 			\BibAuthor{Tom Veniat and Ludovic Denoyer}
+% 			\BibTitle{Learning Time/Memory-Efficient Deep Architectures With Budgeted Super Networks}~//
+% 			\BibJournal{CVPR}, 2018, Pp.\, 3492--3500.
+			
+% 		\end{thebibliography}
+		
+% \end{frame}
+
+
+\end{document} 

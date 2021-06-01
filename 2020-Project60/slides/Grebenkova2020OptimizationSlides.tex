@@ -1,0 +1,314 @@
+\documentclass[9pt,pdf,hyperref={unicode}]{beamer}
+\beamertemplatenavigationsymbolsempty
+
+\setbeamertemplate{blocks}[rounded=true, shadow=true]
+\setbeamertemplate{footline}[page number]
+\usepackage{multicol}
+
+\usefonttheme{serif}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{amsmath,mathrsfs,mathtext}
+\usepackage{graphicx, epsfig}
+\usepackage{caption}
+\usepackage{subfig}
+\usepackage{amsmath, bm}
+
+\usepackage{comment}
+
+\usepackage{tabularx}
+
+\usepackage{tikz}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\makeatletter
+\let\@@magyar@captionfix\relax
+\makeatother
+
+\usetheme{Warsaw}
+\usecolortheme{sidebartab}
+\definecolor{beamer@blendedblue}{RGB}{31,96,49}
+
+\setbeamertemplate{enumerate items}[circle]
+
+\setbeamersize{text margin left=1.5em, text margin right=1.5em}
+
+\usepackage{ragged2e}
+
+%----------------------------------------------------------------------------------------------------------
+\title[\hbox to 56mm{Вариационная оптимизация модели \hfill\insertframenumber\,/\,\inserttotalframenumber}]
+{Вариационная оптимизация модели глубокого обучения с контролем сложности}
+\author[Гребенькова О.\ С.]{\Large Гребенькова Ольга Сергеевна}
+\institute{ Московский физико-технический институт\\
+Факультет управления и прикладной математики\\
+Кафедра интеллектуальных систем\\
+~\\
+Консультант к.ф.-м.н. О.\ Ю. Бахтеев\\
+Научный руководитель д.ф.-м.н. В.\ В. Стрижов
+}
+
+\date{\footnotesize{\emph{Москва}\\
+ 2020 г.}}
+%----------------------------------------------------------------------------------------------------------
+\begin{document}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}
+\titlepage
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Задача построения модели глубокого обучения}
+
+\begin{block}{Цель} 
+Предложить метод оптимизации модели глубокого обучения с контролем сложности модели.
+\end{block}
+
+~\\
+\begin{block}{Исследуемая проблема}
+По построению семейство моделей глубокого обучения имеет избытычное число параметров. 
+Поэтому использование неоптимизированных моделей является вычислительно сложной задачей.
+\end{block}
+
+~\\
+\begin{block}{Метод решения}
+
+Предлагаемый метод заключается в представлении модели глубокого обучения в виде гиперсети, с использованием байесовского подхода.
+Гиперсеть~--- сеть, которая генерирует параметры для оптимальной модели.
+\end{block}
+
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Исследование}
+
+			\begin{itemize}
+				\item Поведения обобщенной функции обоснованности модели 
+				\item Влияния априорного распределения на сложность модели
+			\end{itemize}
+		
+	$$\mathbf{f}(\mathbf{x}, \mathbf{w})= \mathbf{w}_2^{\top} \textbf{softmax}(\mathbf{w}_1^{\top} \mathbf{x}_1  + \mathbf{b}_1) + \mathbf{b}_2.$$
+	
+	\begin{figure}[h]
+    \center{\includegraphics[width=0.50\linewidth]{1.eps} \\График зависимости точности классификации от процента удалённых параметров}
+    \label{ris:image1}
+    \end{figure}
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+	\begin{frame}{Основная литература}
+		%\begin{thebibliography}{1}
+			
+			\bibitem{conf/nips/Graves11}
+			\textsc{\BibAuthor{Alex Graves}}
+			
+			\textbf{\BibTitle{Practical Variational Inference for Neural Networks}}~//
+			\BibJournal{Advances in Neural Information Processing Systems 24: 25th Annual Conference on Neural Information Processing Systems 2011. Proceedings of a meeting held 12-14 December 2011, Granada, Spain}
+			
+			\bibitem{journals/corr/HaDL16}
+			\textsc{\BibAuthor{David Ha and Andrew M. Dai and Quoc V. Le}}
+			
+			\textbf{\BibTitle{HyperNetworks}}~//
+			\BibJournal{CoRR}, vol. abs/1609.09106, 2018.
+			
+			\bibitem{author09anyscience}
+			\textsc{\BibAuthor{Tom Veniat and Ludovic Denoyer}}
+			
+			\textbf{\BibTitle{Learning Time/Memory-Efficient Deep Architectures With Budgeted Super Networks}}~//
+			\BibJournal{CVPR}, 2018, Pp.\, 3492--3500.
+			
+	%	\end{thebibliography}
+		
+	\end{frame}
+
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Заданы}
+\begin{enumerate}
+    \item выборка 
+    $$\mathfrak{D} = \{ \mathbf{x}_i, y_i\}, \quad i = 1,\dots, m, \quad \mathbf{x}_i \in \mathbb{R}^m, \quad y_i \in \{1,\dots,Y\}, $$
+    \item модель
+    $$\mathbf{f}(\mathbf{x},\mathbf{w}) : \mathbb{R}^m \times \mathbb{R}^n \longrightarrow \mathbb{R}^Y,$$
+     где $\mathbf{w} \in \mathbb{R}^n$ --- пространство параметров модели,
+    \item априорное распределение вектора параметров в пространстве $\mathbb{W}$:
+    $$p(\mathbf{w}) \sim \mathcal{N} (\boldsymbol{\mu}, \mathbf{A}_{\text{pr}}^{-1}),$$
+    \item распределение, аппроксимирующее неизвестное апостериорное распределение $p(\mathbf{w}| \mathfrak{D})$:
+    $$q(\mathbf{w}) \sim \mathcal{N} (\mathbf{m},\mathbf{A}_{\text{ps}}^{-1}).$$
+    Предполагается, что:
+    $$q(\mathbf{w}) \approx p(\mathbf{w}|\mathfrak{D}) = \frac{p(\mathfrak{D} | \mathbf{w}) p(\mathbf{w})}{p(\mathfrak{D})}$$
+\end{enumerate}
+
+
+
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}[shrink=5]{Постановка задачи оптимизации параметров}
+    \textbf{Логарифмическая функция правдобподобия выборки:}
+		\begin{equation*}
+            \mathcal{L}_\mathfrak{D}(\mathbf{w}|\mathfrak{D}) \propto \log p(\mathfrak{D}|\mathbf{w}).
+        \end{equation*}	
+    \textbf{Логарифм обоснованности модели:}
+        \begin{equation*}
+            \log p(\mathfrak{D}) = \log \int\limits_{\mathbf{w}\in \mathbb{W}} p(\mathfrak{D}|\mathbf{w})p(\mathbf{w}) d\mathbf{w}.
+        \end{equation*}
+    При оценке интеграла получаем:
+    \begin{equation*}
+        \mathcal{L}(\mathfrak{D}) = \log p(\mathfrak{D}) \geq \int\limits_{\mathbf{w}\in \mathbb{W}} q(\mathbf{w}) \log \frac{p(\mathbf{w})}{q(\mathbf{w})}d\mathbf{w} + \int\limits_{\mathbf{w}\in \mathbb{W}} q(\mathbf{w}) \log p(\mathfrak{D}|\mathbf{w})d\mathbf{w} =
+    \end{equation*}
+    \begin{equation*}
+     = \mathcal{L}_{\mathbf{w}}(\mathfrak{D}, \mathbf{w}) + \mathcal{L}_E (\mathfrak{D}).
+    \end{equation*}
+    \textbf{Обобщенная функция обоснованности:}
+    $ \lambda\mathcal{L}_{\mathbf{w}}(\mathfrak{D}, \mathbf{w}) - \mathcal{L}_E (\mathfrak{D})$
+    \begin{block}{Максимизация функционала} 
+       \begin{equation*}
+            \label{nohyper}
+            \mathfrak{G}(\lambda) = \argmax\limits_{w \in \mathbb{W}} ( \log p(\mathfrak{D}| \mathbf{w})  - \lambda D_{KL}(q(\mathbf{w})||p(\mathbf{w})) ).
+        \end{equation*}
+    \end{block}
+    
+    
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}[shrink=5]{Построение гиперсети для контроля сложности модели}
+\begin{block}{Гиперсеть}
+    Параметрическое отображение из множества $\Lambda$ во множество параметров модели $\mathbb{W}$:
+    \[ \mathbf{G}: \Lambda \times \mathbb{U} \to \mathbb{W},\]
+    где $\mathbb{U}$ --- множество допустимых параметров гиперсети, $\Lambda$ --- множество параметров, контролирующих сложность модели. 
+\end{block}
+\begin{block}{Реализация с отображением во множество матриц низкого ранга}
+    \begin{equation*}
+        \mathbf{G}_\text{lowrank}(\mathbf{\lambda})= 
+        (\mathbf{f}(\lambda)\mathbf{U}_1) (\mathbf{f} (\lambda) \mathbf{U}_2)^\top + \mathbf{b}_1.
+    \end{equation*}
+\end{block}
+\begin{block}{Реализация с линейной аппроксимацией}
+    \begin{equation*}
+    \label{hyper2}
+    \mathbf{G}_\text{linear}(\mathbf{\lambda})= \lambda\mathbf{b}_2 + \mathbf{b}_3.
+    \end{equation*}
+\end{block}
+\begin{block}{Метод --- оптимизация параметров гиперсети по случайно порожденным значениям параметра сложности $\lambda $}
+    \[\mathsf{E}_{\lambda \sim \mathcal{U}(\Lambda)} (\log p(\mathfrak{D}| \mathbf{w}) - \lambda D_{KL}(q(\mathbf{w})||p(\mathbf{w})))
+\to \max_{\mathbf{U} \in \mathbb{U}},\]
+где $\mathcal{U}$ --- равномерное распределение.
+\end{block}
+
+
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Вычислительный эксперимент}
+\begin{block}{Цель}
+		Исследовать поведение обобщенной функции обоснованности модели. Сравнить методы построения моделей напрямую без использования гиперсетей и с их использованием.
+\end{block}
+\begin{block}{Критерий качества модели --- точность классификации}
+    \[ \text{Accuracy} = 1 - \frac{1}{m} \sum_{i = 1}^{m}[\mathbf{f}(\mathbf{x}_i, \mathbf{w}) \neq y_i].\]
+\end{block}
+\begin{block}{Критерий удаления параметров --- относительная плотность модели}
+\[ \rho(w_i) \approx \exp{\frac{\mu_i^{2}}{2 \sigma_i^{2}}}. \]
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Вычислительный эксперимент: модель без гиперсети}
+Была рассмотрена нейросеть состоящая из двух слоёв: 100 и 10 нейронов соответственно,
+где второй слой отвечает за softmax-функцию.
+
+$$\mathbf{f}(\mathbf{x}, \mathbf{w})= \mathbf{w}_2^{\top} \textbf{softmax}(\mathbf{w}_1^{\top} \mathbf{x}_1  + \mathbf{b}_1) + \mathbf{b}_2.$$
+	\begin{figure}[h]
+    \center{\includegraphics[width=0.50\linewidth]{1.eps} \\График зависимости точности классификации от процента удалённых параметров}
+    \label{ris:image1}
+    \end{figure}
+Вариационный метод позволяет удалить $ \approx 80\% $ параметров при всех $\lambda$, кроме значений $0$  и $0.1$, без значительной потери точности классификации.
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Вычислительный эксперимент: гиперсети}
+Параметры экcперимента:
+\begin{enumerate}
+	\justifying
+		\item  оптимизатор SGD;
+		\item  50 эпох;
+		\item  параметр априорной дисперсии = $0.1$;
+	    \item  для низкоранговой аппроксимации рассмотрен случай с 50 нейронами в скрытом слое и с функций активации ReLU;
+		\item  для линейной аппроксимации каждый батч проходил процесс оптимизации с 5 разными значениями сэмплируемой $\lambda$.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}[shrink=5]{Сравнение базовой модели с низкоранговой гиперсетью}
+\begin{figure}[h]
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=1\linewidth]{1.eps} \\ Базовая модель}
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=1\linewidth]{2.eps} \\ Гиперсеть с отображением во множество матриц низкого ранга}
+\end{minipage}
+
+\label{ris:image1}
+\end{figure}
+
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}[shrink=5]{Сравнение базовой модели с гиперсетью с лин. аппроксимацией}
+\begin{figure}[h]
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=1\linewidth]{1.eps} \\ Базовая модель}
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=1\linewidth]{3.eps} \\ Гиперсеть с линейной аппроксимацией}
+\end{minipage}
+
+\label{ris:image1}
+\end{figure}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}[shrink=5]{Сравнение моделей после дообучения}
+\begin{figure}[h]
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=1\linewidth]{2.eps} \\ Гиперсеть с отображением во множество матриц низкого ранга}
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=1\linewidth]{4.eps} \\ Модель с низкоранговой аппроксимацией с дообучением}
+\end{minipage}
+
+\label{ris:image1}
+\end{figure}
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}[shrink=5]{Сравнение моделей после дообучения}
+\begin{figure}[h]
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=1\linewidth]{3.eps} \\ Гиперсеть с линейной аппроксимацией}
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=1\linewidth]{5.eps} \\ Модель с линейной аппроксимацией с дообучением}
+\end{minipage}
+
+\label{ris:image1}
+\end{figure}
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------
+
+\begin{frame}{Заключение}
+\justifying
+
+	\begin{enumerate}
+	\justifying
+		\item  Вариационный метод позволяет удалить $ \approx 80\% $ параметров при всех $\lambda$, кроме значений $0$  и $0.1$, без значительной потери точности классификации.
+		\item  Несмотря на потерю в качестве, гиперсеть получает схожие результаты, что и обычные модели при меньших вычислительных затратах.
+		\item  По графикам видно, что модель сохраняет схожие свойства (к примеру точность классификации) при прореживании.
+		\item  Планируется провести эксперимент с большим количеством запусков для уточнения результатов.
+	\end{enumerate}
+	
+
+\end{frame}
+
+
+\end{document} 
