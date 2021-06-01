@@ -1,0 +1,333 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\renewcommand{\rmdefault}{cmr}
+%\usepackage{dsfont} % for indicator function
+\usepackage[english,russian]{babel}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{float}
+%\usepackage{slashbox}
+%пакеты и команды, необходимость в которых может возникнуть по ходу работы (Вы можете добавлять свои):
+\usepackage{indentfirst}%для отступов
+%\usepackage{subfig}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{subfloat}
+
+\usepackage{geometry}
+\geometry{left=2.5cm}
+\geometry{right=1.0cm}
+\geometry{top=2.0cm}
+\geometry{bottom=2.0cm}
+\renewcommand{\baselinestretch}{1.}
+
+
+\usepackage{multicol}
+\usepackage{subfigure}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+%\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{hhline}
+%\usepackage{multirow}
+\usepackage{epsfig}
+\usepackage{graphics,graphicx}
+%\usepackage{epic}
+\usepackage{amscd}
+%\usepackage{ecltree}
+\usepackage{color}
+
+\usepackage{array}
+
+
+\graphicspath{{figures/}}
+
+\newcommand{\TRANSP}{{\text{\tiny\sffamily\upshape\mdseries T}}}
+\newcommand{\T}{{\text{\tiny\sffamily\upshape\mdseries T}}}
+\newcommand{\xmatr}{\mathbf{X}}
+\newcommand{\qmatr}{\mathbf{Q}}
+\newcommand{\hmatr}{\mathbf{H}}
+\newcommand{\umatr}{\mathbf{U}}
+\newcommand{\zmatr}{\mathbf{Z}}
+\newcommand{\gmatr}{\mathbf{G}}
+\newcommand{\imatr}{\mathbf{I}}
+\newcommand{\vmatr}{\mathbf{V}}
+\newcommand{\amatr}{\mathbf{A}}
+\newcommand{\bmatr}{\mathbf{B}}
+\newcommand{\norm}{\mathcal{N}}
+\newcommand{\sign}{\mathrm{sign}}
+\newcommand{\lambdamatr}{\mathbf{\Lambda}}
+\newcommand{\sigmamatr}{\mathbf{\Sigma}}
+\newcommand{\gammamatr}{\mathbf{\Gamma}}
+\newcommand{\omegamatr}{\mathbf{\Omega}}
+\newcommand{\deltamatr}{\mathbf{\Delta}}
+\newcommand{\rmatr}{\mathbf{R}}
+\newcommand{\tmatr}{\mathbf{T}}
+\newcommand{\smatr}{\mathbf{S}}
+\newcommand{\chimatr}{\boldsymbol{\chi}}
+\newcommand{\yvec}{\mathbf{y}}
+\newcommand{\zvec}{\mathbf{z}}
+\newcommand{\dvec}{\mathbf{d}}
+\newcommand{\pvec}{\mathbf{p}}
+\newcommand{\pivec}{\boldsymbol{\pi}}
+\newcommand{\gammavec}{\boldsymbol{\gamma}}
+\newcommand{\lambdavec}{\boldsymbol{\lambda}}
+\newcommand{\alphavec}{\boldsymbol{\alpha}}
+\newcommand{\muvec}{\boldsymbol{\mu}}
+%\newcommand{\epsvec}{\boldsymbol{\varepsilon}}
+%\newcommand{\argmax}{\mathop{\arg \max}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\argmin}{\mathop{\arg \min}}
+\newcommand{\Argmax}{\mathop{\mathrm{Arg} \max}}
+\newcommand{\Argmin}{\mathop{\mathrm{Arg} \min}}
+\newcommand{\tr}{\mathop{tr}}
+\newcommand{\vvec}{\mathbf{v}}
+\newcommand{\fvec}{\mathbf{f}}
+\newcommand{\fmatr}{\mathbf{F}}
+\newcommand{\ebb}{\mathbb{E}}
+\newcommand{\dbb}{\mathbb{D}}
+\newcommand{\dsam}{\mathfrak{D}}
+%\newcommand{\xivec}{\boldsymbol{\xi}}
+\newcommand{\X}{{\mathbf{X}}}
+\newcommand{\w}{{\mathbf{w}}}
+
+\newcommand{\uvec}{\mathbf{u}}
+\newcommand{\bvec}{\mathbf{b}}
+%\newcommand{\fvec}{\mathbf{f}}
+\newcommand{\mvec}{\mathbf{m}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\chivec}{\boldsymbol{\chi}}
+\newcommand{\etavec}{\boldsymbol{\eta}}
+%\newcommand{\lambdavec}{\boldsymbol{\lambda}}
+\newcommand{\thetavec}{\boldsymbol{\theta}}
+\newcommand{\cvec}{\mathbf{c}}
+\newcommand{\svec}{\mathbf{s}}
+\newcommand{\xvec}{\mathbf{x}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\wvec}{\mathbf{w}}
+\newcommand{\evec}{\mathbf{e}}
+\newcommand{\ematr}{\mathbf{E}}
+\newcommand{\pmatr}{\mathbf{P}}
+\newcommand{\avec}{\mathbf{a}}
+\newcommand{\gvec}{\mathbf{g}}
+
+\newcommand{\nillvec}{\boldsymbol{0}}
+\newcommand{\epsvec}{\boldsymbol{\varepsilon}}
+\newcommand{\epsmatr}{\boldsymbol{\varepsilon}}
+\newcommand{\nillmatr}{\boldsymbol{O}}
+\newcommand{\deist}{\mathbb{R}}
+\newcommand{\natur}{\mathbb{N}}
+\newcommand{\cel}{\mathbb{Z}}
+%\newcommand{\argmin}{\mathit{argmin}}
+\newcommand{\scal}{\mathcal{S}}
+%\newcommand{\wcal}{\mathcal{W}}
+\newcommand{\kcal}{\mathcal{K}}
+\newcommand{\prob}{\mathbb{P}}
+\newcommand{\supp}{\mathrm{supp}}
+%\newcommand{\dim}{\mathrm{dim}}
+
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\tcal}{\mathcal{T}}
+\newcommand{\ical}{\mathcal{I}}
+\newcommand{\fcal}{\mathcal{F}}
+\newcommand{\wcal}{\mathcal{W}}
+\newcommand{\ycal}{\mathcal{Y}}
+\newcommand{\xivec}{\boldsymbol{\xi}}
+\newcommand{\ximatr}{\boldsymbol{\xi}}
+\newcommand{\tvec}{\boldsymbol{t}}
+
+\newcommand{\xcal}{\mathcal{X}}
+
+\newcommand{\jcal}{\mathcal{J}}
+\newcommand{\acal}{\mathcal{A}}
+\newcommand{\bcal}{\mathcal{B}}
+\newcommand{\mcal}{\mathcal{M}}
+\newcommand{\Thetavec}{\boldsymbol{\Theta}}
+%\renewcommand{\thesubfigure}{\asbuk{subfigure}}
+
+
+
+%different caption style: ``Fig.~N.~Caption text''
+\makeatletter
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1.~#2}%
+  \ifdim \wd\@tempboxa >\hsize
+    #1.~#2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+\makeatother
+
+\reversemarginpar
+
+%\captionsetup[figure]{labelformat=gostfigure, justification=centering}
+%\captionsetup[subfigure]{labelformat=gostfigure, justification=centering}
+%\captionsetup[table]{labelformat=gostfigure, justification=centering}
+
+\title{Анализ метода отбора признаков QPFS}
+\author{Александр Адуенко}
+
+\begin{document}
+\maketitle
+
+Рассматриваемый метод предложен в~\cite{qpfs_original} и дается следующей оптимизационной задачей.
+\begin{gather}
+\label{eq:qpfs_statement}
+\frac{1}{2}(1 - \alpha) \avec^{\T} \qmatr \avec - \alpha \bvec^{\T} \avec \to \min_{\avec}\\
+\text{s.t.}\: \avec \geq 0,\:\sum_i a_i = 1.
+\end{gather}
+Решение задачи~\eqref{eq:qpfs_statement} $\avec^*$ определяет, какие признаки используются при построении модели. Признак $j$ активен $\Longleftrightarrow$ $a_j > 0$.
+
+Эта задача эквивалетна
+\begin{gather}
+\label{eq:qpfs_statement_adj}
+\frac{1}{2} \avec^{\T} \qmatr \avec - \frac{\alpha}{1-\alpha} \bvec^{\T} \avec \to \min_{\avec}\\
+\text{s.t.}\: \avec \geq 0,\:\sum_i a_i = 1.
+\end{gather}
+Обозначим эту задачу $S\left(\underbrace{\frac{\alpha}{1 - \alpha}}_{\beta^{-1}},\:1\right)$, где 1 указывает на норму решения. Рассмотрим задачу $S(\beta^{-1},\:\gamma)$ и сделаем замену переменной $\avec = \gamma \tilde{\avec}$, получим
+\begin{gather}
+\gamma^2 \left(\frac{1}{2} \tilde{\avec}^{\T} \qmatr \tilde{\avec} - \frac{1}{\beta\gamma} \bvec^{\T} \tilde{\avec}\right) \to \min_{\tilde{\avec}}\\
+\text{s.t.}\: \tilde{\avec} \geq 0,\:\sum_i \tilde{a}_i = 1,
+\end{gather}
+откуда задача $S(\beta^{-1},\:\gamma)$ эквивалентна задаче $S((\beta \gamma)^{-1},\:1)$ в терминах активных признаков (сами же решения отличаются в $\gamma$ раз), а потому мы имеем дело именно с однопараметрическим семейством и задание нормы решения, равной одному, не ограничивает общности.
+
+Рассмотрим теперь замену переменной $\avec = \beta^{-1} \tilde{\avec}$ в~\eqref{eq:qpfs_statement_adj}. Получим, что~\eqref{eq:qpfs_statement_adj} эквивалентна при $\alpha \in (0,\:1)$ задаче
+\begin{gather}
+\label{eq:qpfs_statement_equality}
+\frac{1}{2} \tilde{\avec}^{\T} \qmatr \tilde{\avec} - \bvec^{\T} \tilde{\avec} \to \min_{\tilde{\avec}}\\
+\text{s.t.}\: \tilde{\avec} \geq 0,\:\sum_i \tilde{a}_i = \beta.
+\end{gather}
+Наряду с задачей~\eqref{eq:qpfs_statement_equality} можно рассмотреть задачу
+\begin{gather}
+\label{eq:qpfs_statement_inequality}
+\frac{1}{2} \tilde{\avec}^{\T} \qmatr \tilde{\avec} - \bvec^{\T} \tilde{\avec} \to \min_{\tilde{\avec}}\\
+\text{s.t.}\: \tilde{\avec} \geq 0,\:\sum_i \tilde{a}_i \textcolor{red}{\leq} \beta
+\end{gather}
+и соответствующую задачу без ограчения на норму вектора $\tilde{\avec}$
+\begin{gather}
+\label{eq:qpfs_statement_unconstrained}
+\frac{1}{2} \tilde{\avec}^{\T} \qmatr \tilde{\avec} - \bvec^{\T} \tilde{\avec} \to \min_{\tilde{\avec}}\\
+\text{s.t.}\: \tilde{\avec} \geq 0.
+\end{gather}
+
+Задача~\eqref{eq:qpfs_statement} не позволяет выбросить все признаки, поскольку $\|\avec\| = 1 > 0$. Задача~\eqref{eq:qpfs_statement_inequality} эквивалентна ограничению неравенства в исходной задаче и, например, при $\alpha=0$ будет иметь решением исключение всех признаков. Далее приведем анализ свойств решения~\eqref{eq:qpfs_statement} с ограничением равенства и неравенства для разных значений $\alpha$.
+
+\begin{table}[!htbp]
+\caption{Свойства решения в методе QPFS в зависимости от параметра $\alpha$}
+\label{tab:solution_properties}
+\begin{tabular}{|c|c|c|}
+\hline
+$\alpha$ & Равенство & Неравенстсво\\
+\hline
+$\alpha=0$ & Используются все признаки, $\qmatr \avec^* = \eta \evec,\:\eta > 0$ & Выброшены все признаки \\
+\hline
+$\alpha \to 0$ &  Используются все признаки, $\qmatr \avec^* \to \eta \evec,\:\eta > 0$ & Решение~\eqref{eq:qpfs_statement_unconstrained} \\
+\hline
+$\alpha \to 1$ & Сходимся к отбору одного признака с максимальным $b_j$ & То же, что и в <<равенство>>\\
+\hline
+$\alpha = 1$ & Отбор одного признака с максимальным $b_j$ & То же, что и в <<равенство>>\\
+\hline
+\end{tabular}
+\end{table}
+
+В случае $\alpha=0$ для неравенства ($\sum_i a_i \leq 1$) решением является $\avec^* = \nillvec$. В случае равенства ($\sum_i a_i = 1$), чтобы минимизировать потери от необходимости иметь ненулевой $\avec$, в оптимальном $\avec^*$ оптимизируемая функция $\frac{1}{2} \avec^{\T} \qmatr \avec$ должна иметь одинаковый градиент по всем направлениям (так как иначе можно уменьшить одну координату, увеличить другую, оставив норму $\avec$ неизменной, уменьшив значение функции). Тот же результат можно получить и другим способом - из рассмотрения Лагранжиана задачи.
+
+\subsection*{Анализ решения QPFS в зависимости от параметра $\alpha$}
+Задачи~\eqref{eq:qpfs_statement_equality} и~\eqref{eq:qpfs_statement_inequality} эквивалентны для некоторых $\eta$ задаче
+$$
+\frac{1}{2} \tilde{\avec}^{\T} \qmatr \tilde{\avec} - \bvec^{\T} \tilde{\avec} + \eta \sum_j \avec_j \to \min_{\tilde{\avec}}\:\text{s.t.}\: \tilde{\avec} \geq 0,
+$$
+что эквивалентно
+$$
+\frac{1}{2} \tilde{\avec}^{\T} \qmatr \tilde{\avec} - \tilde{\bvec}^{\T} \tilde{\avec} \to \min_{\tilde{\avec}}\:\text{s.t.}\: \tilde{\avec} \geq 0,
+$$
+где $\tilde{b}_j = b_j - \eta$ и $\eta$ монотонно убывает по $\|\tilde{\avec}\|_1 = \beta$. При этом для случая неравенства $\eta \geq 0$, в для равенства $\eta < 0$, если $\beta > \|\avec^*\|_1$, где $\avec^*$ есть решение задачи без ограничения на норму~\eqref{eq:qpfs_statement_unconstrained}.
+
+Таким образом, добавление ограничения на норму, фактически штрафует релевантность и происходит исключение тех признаков, у которых $b_j < \eta$, поскольку у них поправленная релевантность $\tilde{b}_j$ становится отрицательной.
+
+\section*{Связь с лассо для линейной регрессии}
+Стандартная задача линейной регрессии с $l_1$ регуляризацией (лассо) имеет вид
+\begin{equation}
+\label{eq:lasso}
+\frac{1}{2}\|\yvec - \xmatr \wvec\|_2^2 + \tau \|\wvec\|_1 \to \min_{\wvec}.
+\end{equation}
+Предположим, что $\xvec_j^{\T}\xvec_j = 1,\:\yvec^{\T} \yvec = 1$, то есть признаки и целевая переменная нормированы. В качестве функций сходства (similarity) и релевантности (relevance) в QPFS рассмотрим корреляцию Пирсона (не модуль как обычно в QPFS!). Имеем
+$$
+\frac{1}{2}\|\yvec - \xmatr \wvec\|_2^2 + \tau \|\wvec\|_1 = \frac{1}{2} \underbrace{\yvec^{\T} \yvec}_{=1} + \frac{1}{2} \wvec^{\T} \underbrace{\xmatr^{\T} \xmatr}_{\tilde{\qmatr}} \wvec - (\underbrace{\xmatr^{\T} \yvec}_{\tilde{\bvec}})^{\T} \wvec,
+$$
+где учтена нормированность всех признаков и целевой переменной, откуда корреляция и ковариация совпадают; $\tilde{\qmatr},\:\tilde{\bvec}$ корреляции со знаком между признаками и признаками и целевой переменной соответственно. Отсюда задачу~\eqref{eq:lasso} можно переписать в виде
+$$
+\frac{1}{2} \wvec^{\T} \tilde{\qmatr} \wvec - \tilde{\bvec}^{\T} \wvec + \tau \|\wvec\|_1 \to \min_{\wvec},
+$$
+что может быть переписано в эквивалентную задачу с ограничением равенства (так же для неравенства) для некоторого $\eta$
+\begin{gather}
+\label{eq:lasso_constrained_equiv}
+\frac{1}{2} \wvec^{\T} \tilde{\qmatr} \wvec - \tilde{\bvec}^{\T} \wvec \to \min_{\wvec}\\
+\text{s.t.}\:\|\wvec\|_1 = \eta.
+\end{gather}
+Если все корреляции Пирсона между признаками и между признаками и целевой переменной неотрицательны (то есть векторы $\xvec_1,\:\ldots,\:\xvec_n,\:\yvec$ лежат в одном многомерном квадранте), то $\tilde{\qmatr} = \qmatr,\:\tilde{\bvec} = \bvec$, то есть задача~\eqref{eq:lasso_constrained_equiv} тождественна QPFS, но без ограничения $\wvec \geq 0$. Таким образом, QPFS можно рассматривать как lasso ограничением на неотрицательность весов, если все корреляции Пирсона между признаками и между признаками и целевой переменной неотрицательны. Далее, если истинный вектор весов в линейной регрессии $\wvec \geq 0$, то условие не неотрицательность оценки весов тоже избыточно (так как $\wvec^*$ в задаче~\eqref{eq:lasso_constrained_equiv} и так будет неотрицательным, начиная с некоторого размера выборки), и QPFS будет полностью тождественен lasso. Таким образом, получаем условия тождественности QPFS($\alpha$) методу lasso($\tau$), где между $\alpha$ и $\tau$ существует некоторая связь:
+\begin{itemize}
+\item Rel = Sim = |Pearson correlation|;
+\item Нормированность признаков и целевой переменной: $\yvec^{\T} \yvec = \xvec_j^{\T} \xvec_j = 1,\:j=1,\:\ldots,\:n$;
+\item Неотрицательность попарных корреляций: $\yvec^{\T} \xvec_j \geq 0,\:\xvec_j^{\T} \xvec_l \geq 0,\:j,\;l=1,\:\ldots,\:n$;
+\item Неотрицательность истинного вектора весов $\wvec^* \geq 0$.
+\end{itemize}
+Отметим, что в lasso реализуется ситуация, когда выбрасываются все признаки, когда $\tau \to \infty$, что соответствует QPFS с ограничением неравенства (а не равенства) при $\alpha=0$. Кроме того, <<закритический>> режим из QPFS с равенством, когда $\|\avec\|_1 = \beta > \|\avec^*\|$, где $\avec^*$ есть решение~\eqref{eq:qpfs_statement_unconstrained}, в lasso не реализуется, поскольку, штраф за норму приводит всегда к ее сокращению, а потому $\tau \to 0$ в lasso соотетствует $\beta \to \|\avec^*\|$ в QPFS с ограничением типа равенства.
+
+\section*{Проблемы QPFS}
+Благодаря условию на неотрицательность коэффициентов $\avec \geq 0$ в задаче QPFS~\eqref{eq:qpfs_statement_equality}, штраф на $\|\avec\|_1$ становится штрафом на сумму коэффициентов, что упрощает оптимизацию. Авторы оригинального метода~\cite{qpfs_original} прямо указывают на скорость оптимизации как на основное преимущество метода QPFS при сопоставимом качестве прогноза (например, с lasso) на тестовых выборках в рассмотренных наборах данных. 
+
+Как показано в предыдущей главе, при выполнении некоторых условий (в частности, неотрицательности истинного вектора параметров модели $\wvec^*$), QPFS будет в точности эквивалентен методу lasso, то есть метод обладает лучшими свойствами с точкиы зрения оптимизации, при этом давая то же решение, что и lasso. Однако, когда условия эквивалентности не выполнены, метод начинает проигрывать lasso, поскольку не учитывает, например, что релевантность пары признаков может быть значительно выше, чем релевантность каждого из них.
+
+\paragraph*{Пример.} Рассмотрим выборку $(\xmatr, \:\yvec)$ в признаковом пространстве размерности $n=2$. 
+\begin{equation}
+\label{eq:sample_2features}
+x_{1i} \sim \norm(x_{1i}|0,\:1),\:y_i\sim \norm(y_i|0,\:1),\:x_{2i} = x_{1i} + \varepsilon y_i,\:\varepsilon > 0.
+\end{equation}
+Истинная корреляция Пирсона первого признака и целевой переменной $y$ равна 0, а корреляция со вторым~--~равна $\varepsilon / \sqrt{1 + \varepsilon^2}$, схожесть двух признаков $1 / \sqrt{1 + \varepsilon^2}$.   
+При малом $\varepsilon$ выборочная корреляция обоих признаков с целевой переменной будет мала, а схожесть двух признаков - велика. При этом надежное восстановление целевой переменной $y$ возможно только при наличии обоих признаков в выборке, что соответствует ситуации с отсутствием отбора признаков (малое $\alpha$).
+
+Добавим теперь в выборку $N$ шумовых признаков. Истинное сходство каждого из таких признаков с целевой переменной равно 0 (такое же как и для признака 1) и с учетом того, что QPFS не учитывает взаимодействия между признаками, признаки 1 и 2 не имеют значительного преимущества по отношению к шумовым в терминах релевантности целевой переменной (признак 1 в точности шумовой в изоляции, так как независим от $y$). При этом признаки 1 и 2 получают штраф за похожесть друг на друга. По этой причине при работе QPFS либо происходит исключение одного или обоих признаков 1 и 2 при исключении некоторых или вех шумовых, или оба признака 1 и 2 остаются, но вместе с ними остаются почти все или все шумы (см. эксперимент). В то же время Lasso учитывает взаимосвязи между признаками и не требует нетрицательности коэффициентов (ссылка на сравнение на этом датасете QPFS и lasso). В рассматриваемом примере не выполнено одно из условий эквивалентности lasso  QPFS:
+\begin{itemize}
+\item $\wvec^* = (-1 / \varepsilon,\:1 / \varepsilon)^{\T}$ содержит отрицательные значения.
+\end{itemize}
+
+Подобный пример (нужно добавить в статью вместе с соответствующим экспериментом с $N=10$ или $N=100$ шумами):
+\begin{enumerate}
+\item $x_{2i} = -x_{1i} + \varepsilon y_i \to$ не выполнено условие неотрицательной корреляции между признаками, а остальные условия эквивалентности выполнены.
+\end{enumerate}
+\textbf{Замечание:} Подумай, можно ли построить пример, чтобы все условия кроме одного были выполнены для оставшихся условий эквивалентности QPFS и lasso.
+
+\section*{Стабильность модели}
+В статье Катруцы (ссылка) стабильность модели (выраженная, например, в терминах $\lambda_{\max}(\xmatr^{\T}\xmatr) / \lambda_{\min}(\xmatr^{\T}\xmatr)$ имеет самостоятельную ценность и наряду с качеством прогноза на тестовой выборке определяет решение о превосходстве одного метода отбора признаков над другим. В этой статье мы предлагаем рассматривать стабильность как априорное знание, которое указывает на то, что априори мы считаем, что выборки с меньшим числом обусловленности на множестве активных признаков появляются чаще в рассматриваемой задаче, чем выборки с большим числом обусловленности. При отсутствии такого знания стабильность стоит рассматривать в контексте повышения качества прогноза: если низкая стабильность модели ведет к снижению качества прогноза, стоит добавить штраф за низку стабильность модели, если качество не снижается, а повышается при уменьшении стабильности, то не стоит предпочитать менее качественную, но более стабильную модель. 
+
+Обозначим $\xmatr(\wvec)$ сужение матрицы признаков на множество признаков $j:\:w_j \neq 0$. Примером соответствующей задачи оптимизации, где есть априорное знание о том, что низкое число обусловленности более предпочтительно является
+$$
+\|\yvec - \xmatr \wvec\|_2^2 + \tau \lambda_{\max}(\xmatr(\wvec)^{\T}\xmatr(\wvec)) / \lambda_{\min}(\xmatr(\wvec)^{\T}\xmatr(\wvec)) \to \min_{\wvec},
+$$
+что соответствует показательному распределению на число обусловленности активных признаков выборки с гиперпараметром $\tau$. В таком виде задача является тяжелой для оптимизации и требует перебора наборов активных признаков, например, с помощью генетического алгоритма.
+
+\paragraph*{Пример 1.} Пусть $y_i \sim \norm(y_i|0,\:1),\:x_{ij} = y_i + \nu \varepsilon_{ij},\:\varepsilon_{ij} \sim \norm(\varepsilon_{ij}|0,\:1)$. \\
+Оптимальная модель использует все признаки и осредняет их для получения наилучшего прогноза $y_i$: $\wvec^* = (1 / n,\:\ldots,\:1 / n)^{\T}$. При этом число обусловленности $\eta = \lambda_{\max}(\xmatr^{\T}\xmatr) / \lambda_{\min}(\xmatr^{\T}\xmatr)$ при малом $\nu$ может быть большим.
+
+\paragraph*{Пример 2.} Пусть в выборке есть дубликат признака $y_i \sim \norm(y_i|0,\:1),\:x_{i1} x_{i2} = y_i + \nu \varepsilon_{i},\:\varepsilon_{i} \sim \norm(\varepsilon_{i}|0,\:1)$. В этом случае число обусловленности равно $\infty$ и имеется неоднозначность решения, минимизирующего $\|\yvec - \xmatr \wvec\|_2^2$. Однако все эти решения имеют $w_1 + w_2 = \mathrm{const}$, а потому если на тестовой выборке признаки 1 и 2 останутся идентичными, качество прогноза будет одинаковым независимо от того, какое разбиение этой константы между $w_1$, $w_2$, мы предпочтем. Обычно для того, чтобы сделать решение однозначным, добавляют слабую квадратичную регуляризацию на $\wvec$, что из всех решения предпочитается то, где $w_1^2 + w_2^2$ минимально, то есть $w_1 = w_2 = const / 2$. 
+
+Заметим, что если есть основания полагать, что сильная мультиколлинеарность в обучающей выборке не будет продолжена в тестовой~\cite{multicollinearity_need_no_continuation}, то специальная обработка муьтиколлинеарности приобретает важность, а конкретный вид поправок зависит от предположений об эволюции корреляций.
+
+\begin{thebibliography}{99}
+
+\bibitem{qpfs_original} \textit{Rodriguez-Lujan I. et al.} Quadratic programming feature selection~//~Journal of Machine Learning Research. – 2010.
+\bibitem{multicollinearity_need_no_continuation}
+\textit{Belsley D. A.} Collinearity and forecasting~//~Journal of Forecasting. – 1984. – Vol.~3. – No.~2. – P.~183-196.
+
+\end{thebibliography}
+
+\end{document} 
