@@ -1,0 +1,17 @@
+Nadaraya: &Nadaraya !IPythonStage
+  name: Nadaraya
+  notebook_pipeline: code/main/NadarayaWatson.pipeline
+
+Phase: &Phase !IPythonStage
+  name: Phase
+  notebook_pipeline: code/main/Phase_detector.pipeline
+
+Vis: &Vis !IPythonStage
+  name: Vis
+  notebook_pipeline: code/main/Visualisation.pipeline
+
+pipeline: !GenericPipeline
+  runs:
+    - *Nadaraya
+    - *Phase
+    - *Vis

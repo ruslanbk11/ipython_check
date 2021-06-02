@@ -1,0 +1,7 @@
+Approximation: &Approximation !IPythonStage
+  name: Approximation
+  notebook_pipeline: code/Approximation.pipeline
+
+pipeline: !GenericPipeline
+  runs:
+    - *Approximation

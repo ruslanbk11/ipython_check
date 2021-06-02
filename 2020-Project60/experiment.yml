@@ -1,0 +1,7 @@
+mnist: &mnist !IPythonStage
+  name: mnist
+  notebook_pipeline: code/mnist_hypernets.pipeline
+
+pipeline: !GenericPipeline
+  runs:
+    - *mnist

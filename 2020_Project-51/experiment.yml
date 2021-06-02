@@ -1,0 +1,17 @@
+basic: &basic !IPythonStage
+  name: basic
+  notebook_pipeline: code/basic_experiment.pipeline
+
+linear: &linear !IPythonStage
+  name: linear
+  notebook_pipeline: code/linear_model_and_ensemble_comparing.pipeline
+
+distance: &distance !IPythonStage
+  name: distance
+  notebook_pipeline: code/distance_between_local_models_and_errors.pipeline
+
+pipeline: !GenericPipeline
+  runs:
+    - *basic
+    - *linear
+    - *distance

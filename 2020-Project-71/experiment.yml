@@ -1,0 +1,7 @@
+Run: &Run !IPythonStage
+  name: Run
+  notebook_pipeline: code/Run.pipeline
+
+pipeline: !GenericPipeline
+  runs:
+    - *Run

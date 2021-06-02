@@ -1,0 +1,7 @@
+BEAMD: &BEAMD !IPythonStage
+  name: BEAMD
+  notebook_pipeline: code/BaseExperimentAndMetodsDifference.pipeline
+
+pipeline: !GenericPipeline
+  runs:
+    - *BEAMD
